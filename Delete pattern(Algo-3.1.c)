@@ -1,0 +1,56 @@
+#include<stdio.h>
+int INDEX(char T[],char P[],int S,int R){
+
+    int k=0,MAX=S+R-1,i,p;
+    while(k<=MAX)
+        {
+           int flag=0;
+            for(i=0;i<R;i++)
+                {
+                    if(P[i]!=T[k+i])
+                        {
+                            flag=1;
+                             break;
+
+                        }
+
+                }
+                if(!flag)
+                    return k;
+                else
+                    k++;
+
+
+        }
+    return -1;
+}
+void DELETE(char *T,int k,int n,int m){
+
+    int i=k;
+    while(i<n-m)
+        {
+            T[i]=T[m+i];
+            i++;
+        }
+    T[n-m]='\0';
+
+}
+int main(){
+    int i,j,k,n,m;
+    char T[500],P[500];
+    scanf("%s\n%s",&T,&P);
+    n=strlen(T);
+    m=strlen(P);
+    k=INDEX(T,P,n,m);
+    while(k!=-1)
+        {
+
+            DELETE(T,k,n,m);
+            printf("%d %s\n",k,T);
+            k=INDEX(T,P,n,m);
+             n=strlen(T);
+
+        }
+    printf("%s\n",T);
+return 0;
+}
